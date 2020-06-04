@@ -66,4 +66,4 @@ def check(prod_name):
 #update('Nikhil',50)
 #delete('Nikhil')
 #add("something","it is something","500.00","1000")
-print(check("something1"))
+#print(check("something1"))
