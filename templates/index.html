@@ -1,5 +1,35 @@
 {% extends "Base.html" %}
 {% block title %}Home Page{% endblock %}
 {% block content %}
-    <h1>Spesina Food and Agro Industries Pvt. Ltd.</h1>
+<form action="#" method="post">
+
+<div>
+    <label for="date">Date</label>
+    <input type="date" id="date" name="date" placeholder="date" required>
+</div>
+    
+<div>
+    <label for="product">Product</label>
+    <select name="product" id="product" required>
+        <option value="roj200">ROJ(200ml)</option>
+        <option value="roj500">ROJ(500ml)</option>
+        <option value="roj1">ROJ(1L)</option>
+        <option value="roj2">ROJ(2L)</option>
+        <option value="roj5">ROJ(5L)</option>
+    </select>
+</div>
+    
+<div>
+    <label for="units">Number of Units</label>
+    <input type="number" id="units" name="units" placeholder="Number of Units" required>
+</div>
+    
+<div>
+    <label for="price">Price</label>
+    <input type="number" id="price" name="price" placeholder="Price" required>
+</div>
+    
+<button type="reset">Reset</button>
+<button type="submit">Submit</button>
+</form>
 {% endblock %}
