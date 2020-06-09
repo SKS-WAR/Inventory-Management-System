@@ -1,35 +1,35 @@
 {% extends "Base.html" %}
-{% block title %}Home Page{% endblock %}
+{% block title %}Spesina IMS{% endblock %}
 {% block content %}
 <form action="#" method="post">
 
 <div>
-    <label for="date">Date</label>
-    <input type="date" id="date" name="date" placeholder="date" required>
-</div>
+    <center><label for="date">Date:</label></center>
+    <center><input type="date" id="date" width="30" name="date" placeholder="date" required></center>
+</div><br>
     
 <div>
-    <label for="product">Product</label>
-    <select name="product" id="product" required>
+    <center><label for="product">Product:</label></center>
+    <center><select name="product" id="product" required>
         <option value="ROJ(200ml)">ROJ(200ml)</option>
         <option value="ROJ(500ml)">ROJ(500ml)</option>
         <option value="ROJ(1L)">ROJ(1L)</option>
         <option value="ROJ(2L)">ROJ(2L)</option>
         <option value="ROJ(5L)">ROJ(5L)</option>
-    </select>
-</div>
+        </select></center>
+</div><br>
     
 <div>
-    <label for="units">Number of Units</label>
-    <input type="number" id="units" name="units" placeholder="Number of Units" required>
-</div>
+    <center><label for="units">Number of Units:</label></center>
+    <center><input type="number" id="units" width="30" name="units" placeholder="Number of Units" required></center>
+</div><br>
     
 <div>
-    <label for="price">Price</label>
-    <input type="number" id="price" name="price" placeholder="Price" required>
-</div>
+    <center><label for="price">Price:</label></center>
+    <center><input type="number" id="price" width="30" name="price" placeholder="Price" required></center>
+</div><br>
     
-<button type="reset">Reset</button>
-<button type="submit">Submit</button>
+    <center><button type="reset">Reset:</button>
+    <button type="submit">Submit:</button></center>
 </form>
 {% endblock %}
