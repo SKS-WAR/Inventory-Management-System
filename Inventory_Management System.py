@@ -12,7 +12,7 @@ def home():
         units = request.form["units"]
         print("Number of units:",(units))
         price = request.form["price"]
-        print("Price:",(price))
+        print("Price: Rs.",(price))
         return redirect(url_for("home"))
     else:
         return render_template("index.html")
