@@ -1,5 +1,6 @@
 from flask import Flask,redirect,url_for, render_template, request
 import sendDataToFirebase
+import webbrowser
 
 app = Flask(__name__)
 
@@ -22,4 +23,5 @@ def home():
 
 
 if __name__ == "__main__":
+    webbrowser.open('http://127.0.0.1:5000')
     app.run()
