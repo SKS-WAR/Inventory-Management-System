@@ -5,16 +5,17 @@ try:
 except:
     pass
 from firebase_admin import db
+import JSON_parser
 
 
-def sendData(name,desc,price,quantity):
-    row = "1"
+def sendData(name,date="",price="",quantity=""):
     ref = db.reference('/IMS')
+    row = JSON_parser.transaction_count(ref.get())
     users_ref = ref
     users_ref.update({
         row : {
             'name' : name,
-            'desc' : desc,
+            'date' : date,
             'price' : price,
             'quantity' : quantity
         }

@@ -3,7 +3,7 @@
 import connector
 import JSON_parser
 
-ref = db.reference('IMS')
-#print(ref.get())
+from firebase_admin import db
 
-JSON_parser.search(ref.get(),'SKS')
+ref = db.reference('/')
+print(ref.get())

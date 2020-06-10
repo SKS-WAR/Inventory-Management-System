@@ -9,7 +9,7 @@ def process(ISM_json):
         print(item)
         
         #print(values)
-        desc = values['desc']
+        date = values['date']
         name = values['name']
         price = values['price']
         quantity = values['quantity']
@@ -23,12 +23,12 @@ def display(ISM_json):
         print("Item number :", item)
         
         #print(values)
-        desc = values['desc']
+        date = values['date']
         name = values['name']
         price = values['price']
         quantity = values['quantity']
         print("Name : ",name)
-        print("Description :", desc)
+        print("Date :", date)
         print("Price :", price)
         print("Quantity :", quantity)
         print("      -------------------")
@@ -42,12 +42,17 @@ def search(ISM_json,prod_name):
             return format_value(values)
         
 def format_value(values):
-    desc = values['desc']
+    date = values['date']
     name = values['name']
     price = values['price']
     quantity = values['quantity']
-    formatted = str("\n Name : "+ name + "\n Descrption : " + desc + "\n Price : "+ price
+    formatted = str("\n Name : "+ name + "\n Date : " + date + "\n Price : "+ price
           + "\n Quantity : " + quantity)
     print(formatted)
     return formatted
-          
+
+def transaction_count(ISM_json):
+    return len(ISM_json)
+
+def format_to_input():
+    pass
