@@ -1,7 +1,8 @@
 from flask import Flask,redirect,url_for, render_template, request
+import sendDataToFirebase
 
 app = Flask(__name__)
-#@app.route("/",methods=["POST","GET"])
+
 @app.route("/",methods=["POST","GET"])
 def home():
     if request.method == "POST":
@@ -13,6 +14,8 @@ def home():
         print("Number of units:",(units))
         price = request.form["price"]
         print("Price: Rs.",(price))
+        #sending data to firebase
+        sendDataToFirebase.sendData(name=product,desc="",price=price,quantity=units)        
         return redirect(url_for("home"))
     else:
         return render_template("index.html")
