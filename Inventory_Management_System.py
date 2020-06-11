@@ -24,6 +24,23 @@ def home():
     else:
         return render_template("index.html")
 
+@app.route("/despatch",methods=["POST","GET"])
+def despatch():
+    if request.method == "POST":
+        d = request.form["date"]
+        p_name = request.form["product"]
+        unts = request.form["units"]
+        amount = request.form["price"]
+        #sending data to firebase
+        try:
+            sendDataToFirebase.sendData(name=p_name,date=d,price=amount,quantity=unts)
+            desktopNotification.notify("Data Inserted successfully")
+        except :
+            desktopNotification.notify("Some Issues Arised")
+        return redirect(url_for("despatch"))
+    else:
+        return render_template("despatch.html")
+
 if __name__ == "__main__":
     webbrowser.open('http://127.0.0.1:5000')
     app.run()
