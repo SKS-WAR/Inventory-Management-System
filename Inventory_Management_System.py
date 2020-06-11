@@ -22,7 +22,7 @@ def home():
             desktopNotification.notify("Some Issues Arised")
         return redirect(url_for("home"))
     else:
-        return render_template("index.html")
+        return render_template("index.html", )
 
 @app.route("/despatch",methods=["POST","GET"])
 def despatch():
