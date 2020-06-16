@@ -14,30 +14,15 @@ config = {
 }
 
 firebase = pyrebase.initialize_app(config)
-
 auth = firebase.auth()
-
-email = "sahoosudeep2010@gmail.com"
-password = "123456"
-
-user = auth.sign_in_with_email_and_password(email, password)
-
-#print(user)
-
-#db = firebase.database()
-
-#print(db.get("price").val())
-
-
-db = firebase.database()
-print(db.child("price").get(user['idToken']).val())
 
 def login(email,password):
     try:
         user = auth.sign_in_with_email_and_password(email, password)
-        return True
+        print("Logged in successfully")
+        return user
     except :
         print("Unable to login")
-        return False
+        return None
     
     
