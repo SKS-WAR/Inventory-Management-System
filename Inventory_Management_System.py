@@ -7,6 +7,15 @@ import webbrowser
 import desktopNotification
 app = Flask(__name__)
 
+@app.route("/login",methods=["POST","GET"])
+def login():
+    if request.method == "POST":
+        name = request.form["uname"]
+        password = request.form["password"]
+        return redirect(url_for("home"))
+    else:
+        return render_template("login.html")
+
 @app.route("/",methods=["POST","GET"])
 def home():
     if request.method == "POST":
