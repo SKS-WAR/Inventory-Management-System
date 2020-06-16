@@ -90,6 +90,17 @@ def logout():
     session.pop('user',None)
     return redirect(url_for('login'))
 
+@app.route('/query')
+def query():
+    a = "hello"
+    b = "world"
+    c = "!"
+    pass
+
+@app.route('/display')
+def display():
+    pass
+
 
 if __name__ == "__main__":
     webbrowser.open('http://127.0.0.1:5000/')
