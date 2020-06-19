@@ -19,7 +19,15 @@ firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 
 db = firebase.database()
-
+user = auth.sign_in_with_email_and_password("sahoosudeep2010@gmail.com", "123456")
+try:
+    total = db.child('IMS').child('amount').child('total').get(user['idToken']).val()
+except :
+    total = 0
+print(total)
+if total == "40":
+    users_ref = db.child('IMS').child('amount')
+    users_ref.update({"total" : "400"} ,token=user['idToken'])
 
 
 def login(email,password):
@@ -37,6 +45,16 @@ def sendProductionData(auth,name,date="",price="",quantity=""):
         row = JSON_parser.transaction_count(db.child('IMS').child('production').get(auth['idToken']).val())
     except:
         row = "0"
+    
+    try:
+        total = db.child('IMS').child('amount').child('total').get(user['idToken']).val()
+    except :
+        total = 0
+    total = str((int)(quantity) + (int)(total))
+    print(total)
+    users_ref = db.child('IMS').child('amount')
+    users_ref.update({"total" : total} ,token=user['idToken'])
+    
     users_ref = db.child('IMS').child('production')
     users_ref.update({
         row : {
@@ -61,3 +79,9 @@ def sendDespatchData(auth,name,date="",price="",quantity=""):
             'quantity' : quantity
         }
     },token=auth['idToken'])
+    
+def amount_calc():
+    pass
+
+
+
