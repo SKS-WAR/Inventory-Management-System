@@ -90,16 +90,21 @@ def logout():
     session.pop('user',None)
     return redirect(url_for('login'))
 
-@app.route('/query')
+@app.route('/query',methods=["GET","POST"])
 def query():
-    a = "hello"
-    b = "world"
-    c = "!"
-    pass
-
-@app.route('/display')
+    if request.method == "POST":
+        user = request.form["name"]
+        password = request.form["pass"]
+        return redirect(url_for("display",usr=user,psw=password))
+    else:
+        return render_template("New.html")
+        
+@app.route('/result',methods=["GET"])
 def display():
-    pass
+    if request.method == "GET":
+        user = request.args.get("usr")
+        password = request.args.get("psw")
+    return f"<h1>The user is {user} and password is {password}"
 
 
 if __name__ == "__main__":
