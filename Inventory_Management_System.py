@@ -96,18 +96,18 @@ def logout():
 @app.route('/query',methods=["GET","POST"])
 def query():
     if request.method == "POST":
-        user = request.form["name"]
-        password = request.form["pass"]
-        return redirect(url_for("display",usr=user,psw=password))
+        month = request.form["month"]
+        a = "Sudeep"
+        b = "Sahoo"
+        return redirect(url_for("display",usr=month,t_product=a,t_dep=b))
     else:
-        return render_template("New.html")
+        return render_template("query.html")
         
 @app.route('/result',methods=["GET"])
 def display():
     if request.method == "GET":
-        user = request.args.get("usr")
-        password = request.args.get("psw")
-    return f"<h1>The user is {user} and password is {password}"
+        month = request.args.get("usr")
+    return f"<h1>{month},{a},{b}</h1>"
 
 
 if __name__ == "__main__":
