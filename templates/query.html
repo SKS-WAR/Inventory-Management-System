@@ -1,0 +1,27 @@
+{% extends "Base.html" %}
+{% block title %}Display page{% endblock %}
+
+{% block content %}
+<form action="#" method="post">
+    
+<div>
+    <center><label for="product">Select a Month:</label></center>
+    <center><select name="month" id="month" required>
+        <option value="January">January</option>
+        <option value="February">February</option>
+        <option value="March">March</option>
+        <option value="April">April</option>
+        <option value="May">May</option>
+        <option value="June">June</option>
+        <option value="July">July</option>
+        <option value="August">August</option>
+        <option value="September">September</option>
+        <option value="October">October</option>
+        <option value="November">November</option>
+        <option value="December">December</option>
+        </select></center>
+    <center><button type="submit" class="btn">Submit:</button></center>
+</div><br>
+    
+</form>
+{% endblock %}
