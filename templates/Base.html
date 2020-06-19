@@ -1,6 +1,6 @@
 <html>
         <head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/my_style.css') }}">
         <title>{% block title %}{% endblock %}</title>
     </head>
     <body>
@@ -36,9 +36,12 @@
             <form class="form-inline my-2 my-lg-0">
               <!--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
               
-                <button style="margin: 5px" class="btn btn-outline-success my-2 my-sm-0" type="submit">Production</button>
-                <button style="margin: 5px" class="btn btn-outline-success my-2 my-sm-0" type="submit">Despatch</button>
-                <button style="margin: 5px" class="btn btn-outline-success my-2 my-sm-0" type="submit">Query</button>
+                <a href="{{ url_for('product') }}"><button type="button" class="btn">Production</button></a>
+                <a href="{{ url_for('despatch') }}"><button type="button" class="btn">Despatch</button></a>
+                <a href="{{ url_for('query') }}"><button type="button" class="btn">Query</button></a>
+                <a href="{{ url_for('logout') }}"><button type="button" class="btn">LOG OUT</button></a>
+                
+                
             </form>
             </div>
     </nav>
