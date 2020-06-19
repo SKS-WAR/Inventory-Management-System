@@ -19,14 +19,14 @@ def login():
         user = firebase.login(name,password)
         session['user'] = user
         if user != None :
-            return redirect(url_for("home"))
+            return redirect(url_for("product"))
         else:
             return render_template('login.html')
     else:
         return render_template("login.html")
 
 @app.route("/product",methods=["POST","GET"])
-def home():
+def product():
     if 'user' in session:
         user = session["user"]
         if request.method == "POST":
@@ -40,7 +40,7 @@ def home():
                 desktopNotification.notify("Data Inserted successfully")
             except :
                 desktopNotification.notify("Some Issues Arised")
-            return redirect(url_for("user"))
+            return redirect(url_for("product"))
         else:
             return render_template("index.html")
     else:
@@ -78,7 +78,7 @@ def despatch():
 #to download a file use <a href = "{{url_for('download_report')}}">Download</a>
 @app.route("/download")
 def download():
-    return render_template("downlaod.html")
+    return render_template("download.html")
 	
 @app.route("/xyz")
 def download_report():
