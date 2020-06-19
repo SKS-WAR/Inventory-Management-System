@@ -1,7 +1,7 @@
-{% extends "Base.html" %}
-{% block title %}Login Page{% endblock %}
-
-{% block content %}
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="my_style.css">
+    </head>
         <h2 style="color: darkblue"><center>Welcome to</center></h2><br>
         <h2 style="color: darkblue"><center>Spesina Food and Agro Industries Pvt. Ltd.</center></h2><hr><br>
         <h2 style="color: darkblue"><center>LOGIN</center></h2>
@@ -9,16 +9,16 @@
 
         <div>
             <center><label for="uname">Username:</label></center>
-            <center><input type="text" id="uname" width="30" name="uname" placeholder="Enter the username" required></center>
+            <center><input type="text" id="uname" width="30" name="uname" placeholder="Enter the username" required class="input"></center>
         </div><br>
 
         <div>
             <center><label for="password">Password:</label></center>
-            <center><input type="password" id="password" width="30" name="password" placeholder="Password" required></center>
+            <center><input type="password" id="password" width="30" name="password" placeholder="Password" required class="input"></center>
         </div><br>
 
             <center><button type="reset">Reset</button>
             <button type="submit">Submit</button></center>
         </form>
 
-{% endblock %}
+</html>
