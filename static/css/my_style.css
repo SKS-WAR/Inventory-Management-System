@@ -1,0 +1,79 @@
+body{
+    width: 100%;
+    height: 100vh;
+    color: aliceblue;
+    background: linear-gradient(-45deg,#40E0D0,#FFFAFA,#40E0D0)
+}
+
+.input{
+    
+}
+
+.middle{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+}
+
+.btn{
+    background: none;
+    border: 1px solid #40E0D0;
+    font-family: "montserrat",sans-serif;
+    text-transform: uppercase;
+    padding: 12px,20px;
+    margin: 10px;
+    cursor: pointer;
+    transition: color 0.4s linear;
+    position: relative;
+    font-size: 25px;
+    padding: 15px 20px;
+    font-style: oblique;
+}
+
+.btn:hover{
+    color: #000;
+    font-size: 30px;
+}
+
+.btn::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: -1;
+    transform: transform 0.5s;
+    transform-origin: 0 0;
+    transition-timing-function: cubic-bezier(0.5,1.6,0.4,0.7);
+}
+
+.btn1::before{
+    transform: scaleY(0)
+}
+
+.btn2::before{
+    transform: scaleY(0)
+}
+
+.btn3::before{
+    transform: scaleY(0)
+}
+.btn4::before{
+    transform: scaleY(0)
+}
+.btn1:hover::before{
+    transform: scaleY(1)
+}
+.btn2:hover::before{
+    transform: scaleY(1)
+}
+.btn3:hover::before{
+    transform: scaleY(1)
+}
+.btn4:hover::before{
+    transform: scaleY(1)
+}
