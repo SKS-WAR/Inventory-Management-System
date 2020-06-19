@@ -5,7 +5,10 @@ except :
     pass
 import webbrowser
 import desktopNotification
-import firebase
+import firebaseAPI_handler
+import sendDataToFirebase
+from datetime import date
+import date_time
 
 app = Flask(__name__)
 app.secret_key = "BIGsecretOfMine&plzDontDecrptMe"
@@ -16,7 +19,7 @@ def login():
     if request.method == "POST":
         name = request.form["uname"]
         password = request.form["password"]
-        user = firebase.login(name,password)
+        user = firebaseAPI_handler.login(name,password)
         session['user'] = user
         if user != None :
             return redirect(url_for("product"))
@@ -30,13 +33,13 @@ def product():
     if 'user' in session:
         user = session["user"]
         if request.method == "POST":
-            dt = request.form["date"]
+            dt = date_time.get_current_date()
             product_name = request.form["product"]
             units = request.form["units"]
             price = request.form["price"]
             #sending data to firebase
             try:
-                sendDataToFirebase.sendProductionData(name=product_name,date=dt,price=price,quantity=units)
+                firebaseAPI_handler.sendProductionData(auth=user,name=product_name,date=dt,price=price,quantity=units)
                 desktopNotification.notify("Data Inserted successfully")
             except :
                 desktopNotification.notify("Some Issues Arised")
@@ -59,13 +62,13 @@ def despatch():
     if 'user' in session:
         user = session["user"]
         if request.method == "POST":
-            d = request.form["date"]
+            d = date_time.get_current_date()
             p_name = request.form["product"]
             unts = request.form["units"]
             amount = request.form["price"]
             #sending data to firebase
             try:
-                sendDataToFirebase.sendDespatchData(name=p_name,date=d,price=amount,quantity=unts)
+                firebaseAPI_handler.sendDespatchData(auth=user,name=p_name,date=d,price=amount,quantity=unts)
                 desktopNotification.notify("Data Inserted successfully")
             except :
                 desktopNotification.notify("Some Issues Arised")
