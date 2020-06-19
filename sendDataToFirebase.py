@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 
-try:
-    import AdminSDK
-except:
-    pass
-from firebase_admin import db
+#try:
+    #import AdminSDK
+#except:
+    #pass
+#from firebase_admin import db
+
+import firebaseAPI_handler
 import JSON_parser
 
-
-def sendProductionData(name,date="",price="",quantity=""):
+def sendProductionData(name,date="",price="",quantity="",auth=None):
     ref = db.reference('/IMS/production/')
     try:
-        row = JSON_parser.transaction_count(ref.get())
+        row = JSON_parser.transaction_count(ref.get(auth))
     except:
         row = "0"
     users_ref = ref
