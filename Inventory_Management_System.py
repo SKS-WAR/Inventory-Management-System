@@ -99,7 +99,7 @@ def query():
         month = request.form["month"]
         a = "Sudeep"
         b = "Sahoo"
-        return redirect(url_for("display",usr=month,t_product=a,t_dep=b))
+        return redirect(url_for("display",usr=month, t_prod=a ,t_dept=b))
     else:
         return render_template("query.html")
         
@@ -107,7 +107,10 @@ def query():
 def display():
     if request.method == "GET":
         month = request.args.get("usr")
-    return f"<h1>{month},{a},{b}</h1>"
+        a = request.args.get("t_prod")
+        b = request.args.get("t_dept")
+        return render_template("result.html",month = month,a=a,b=b)
+    return f"POST method"
 
 
 if __name__ == "__main__":
