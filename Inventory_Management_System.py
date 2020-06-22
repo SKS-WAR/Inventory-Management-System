@@ -96,10 +96,14 @@ def logout():
 @app.route('/query',methods=["GET","POST"])
 def query():
     if request.method == "POST":
+        user = session["user"]
+        
         month = request.form["month"]
-        a = "Sudeep"
-        b = "Sahoo"
-        return redirect(url_for("display",usr=month, t_prod=a ,t_dept=b))
+        total,total_prod,total_dep =  firebaseAPI_handler.calc_month(user,month)
+        
+        #a = "Sudeep"
+        #b = "Sahoo"
+        return redirect(url_for("display",usr=total, t_prod=total_prod ,t_dept=total_dep))
     else:
         return render_template("query.html")
         
