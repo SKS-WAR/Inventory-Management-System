@@ -70,6 +70,17 @@ def sendDespatchData(auth,name,date="",price="",quantity=""):
         row = JSON_parser.transaction_count(db.child('IMS').child('despatch').get(auth['idToken']).val())
     except:
         row = "0"
+    
+    try:
+        total = db.child('IMS').child('amount').child('total').get(user['idToken']).val()
+    except :
+        total = 0
+    total = str((int)(quantity) - (int)(total))
+    print(total)
+    users_ref = db.child('IMS').child('amount')
+    users_ref.update({"total" : total} ,token=user['idToken'])
+    
+    
     users_ref = db.child('IMS').child('despatch')
     users_ref.update({
         row : {
@@ -84,4 +95,5 @@ def amount_calc():
     pass
 
 
-
+def calc_month(month):
+    
