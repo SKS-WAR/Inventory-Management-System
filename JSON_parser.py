@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import datetime
 def process(ISM_json):    
     for row in ISM_json.items():
         #print(person)
@@ -56,3 +56,13 @@ def transaction_count(ISM_json):
 
 def format_to_input():
     pass
+
+def search_by_month(ISM_json,month):
+    count = 0
+    for row in ISM_json:
+        #print(row['date'])
+        date = datetime.datetime.strptime(row['date'], "%Y-%m-%d")
+        month_name = date.strftime("%B")
+        if month == month_name:
+            count += 1
+    return count
