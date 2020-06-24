@@ -43,22 +43,24 @@ def login(email,password):
         return None
     
 
-def sendProductionData(auth,name,date="",price="",quantity=""):
+def sendFilledBottlesProductionData(auth,name,date="",price="",quantity=""):
     try:
-        row = JSON_parser.transaction_count(db.child('IMS').child('production').get(auth['idToken']).val())
+        row = JSON_parser.transaction_count(db.child('IMS').child("bottles").child("filledBottles").child('production').get(auth['idToken']).val())
     except:
         row = "0"
     
     try:
-        total = db.child('IMS').child('amount').child('total').get(user['idToken']).val()
+        total = db.child('IMS').child("bottles").child("filledBottles").child('amount').child('total').get(user['idToken']).val()
     except :
-        total = 0
+        total = "0"
+    if total == None:
+        total = "0"
     total = str((int)(quantity) + (int)(total))
     print(total)
-    users_ref = db.child('IMS').child('amount')
+    users_ref = db.child('IMS').child("bottles").child("filledBottles").child('amount')
     users_ref.update({"total" : total} ,token=user['idToken'])
     
-    users_ref = db.child('IMS').child('production')
+    users_ref = db.child('IMS').child("bottles").child("filledBottles").child('production')
     users_ref.update({
         row : {
             'name' : name,
@@ -68,24 +70,27 @@ def sendProductionData(auth,name,date="",price="",quantity=""):
         }
     },token=auth['idToken'])
 
-def sendDespatchData(auth,name,date="",price="",quantity=""):
+def sendFilledBottlesDespatchData(auth,name,date="",price="",quantity=""):
     
     try:
-        row = JSON_parser.transaction_count(db.child('IMS').child('despatch').get(auth['idToken']).val())
+        row = JSON_parser.transaction_count(db.child('IMS').child("bottles").child("filledBottles").child('despatch').get(auth['idToken']).val())
     except:
         row = "0"
     
     try:
-        total = db.child('IMS').child('amount').child('total').get(user['idToken']).val()
+        total = db.child('IMS').child("bottles").child("filledBottles").child('amount').child('total').get(user['idToken']).val()
     except :
         total = 0
+        
+    if total == None:
+        total = "0"
     total = str((int)(total) - (int)(quantity))
     print(total)
-    users_ref = db.child('IMS').child('amount')
+    users_ref = db.child('IMS').child("bottles").child("filledBottles").child('amount')
     users_ref.update({"total" : total} ,token=user['idToken'])
     
     
-    users_ref = db.child('IMS').child('despatch')
+    users_ref = db.child('IMS').child("bottles").child("filledBottles").child('despatch')
     users_ref.update({
         row : {
             'name' : name,
@@ -95,17 +100,22 @@ def sendDespatchData(auth,name,date="",price="",quantity=""):
         }
     },token=auth['idToken'])
     
-def amount_calc():
-    pass
+#def amount_calc():
+#    pass
 
 
-def calc_month(auth,month):
+def bottlesFilledBottles_calc_month(auth,month):
     #amount = db.child('IMS').child('amount').child('total').get(auth['idToken']).val()
-    json = db.child('IMS').child('production').get(auth['idToken']).val()
+    json = db.child('IMS').child("bottles").child("filledBottles").child('production').get(auth['idToken']).val()
     production_count = JSON_parser.search_by_month(json,month)
-    json = db.child('IMS').child('despatch').get(auth['idToken']).val()
+    json = db.child('IMS').child("bottles").child("filledBottles").child('despatch').get(auth['idToken']).val()
     despatch_count = JSON_parser.search_by_month(json,month)
     amount = production_count - despatch_count
     return amount,production_count,despatch_count
-something = calc_month(user,"June")
-print(something)
+#something = calc_month(user,"June")
+#print(something)
+    
+
+
+
+#sendProductionData(user,"something","someday","50","500")
