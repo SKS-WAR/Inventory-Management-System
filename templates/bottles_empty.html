@@ -1,0 +1,8 @@
+{% extends "Base.html" %}
+{% block title %}Spesina IMS{% endblock %}
+{% block content %}
+<h2 style="color: white"><center>Bottles Empty</center></h2>
+                <a href="{{ url_for('product') }}"><button type="button" class="btn">Bottles Empty</button></a>
+                <a href="{{ url_for('despatch') }}"><button type="button" class="btn">Bottles Filled</button></a>
+                <a href="{{ url_for('query') }}"><button type="button" class="btn">Query</button></a>
+{% endblock %}
