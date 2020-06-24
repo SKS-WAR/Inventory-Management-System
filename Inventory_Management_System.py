@@ -39,7 +39,7 @@ def product():
             price = request.form["price"]
             #sending data to firebase
             try:
-                firebaseAPI_handler.sendProductionData(auth=user,name=product_name,date=dt,price=price,quantity=units)
+                firebaseAPI_handler.sendFilledBottlesProductionData(auth=user,name=product_name,date=dt,price=price,quantity=units)
                 desktopNotification.notify("Data Inserted successfully")
             except :
                 desktopNotification.notify("Some Issues Arised")
@@ -68,7 +68,7 @@ def despatch():
             amount = request.form["price"]
             #sending data to firebase
             try:
-                firebaseAPI_handler.sendDespatchData(auth=user,name=p_name,date=d,price=amount,quantity=unts)
+                firebaseAPI_handler.sendFilledBottlesDespatchData(auth=user,name=p_name,date=d,price=amount,quantity=unts)
                 desktopNotification.notify("Data Inserted successfully")
             except :
                 desktopNotification.notify("Some Issues Arised")
@@ -99,7 +99,7 @@ def query():
         user = session["user"]
         
         month = request.form["month"]
-        total,total_prod,total_dep =  firebaseAPI_handler.calc_month(user,month)
+        total,total_prod,total_dep =  firebaseAPI_handler.bottlesFilledBottles_calc_month(user,month)
         
         #a = "Sudeep"
         #b = "Sahoo"
