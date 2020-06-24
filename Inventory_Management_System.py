@@ -123,7 +123,14 @@ def display():
         return render_template("result.html",month = month,a=a,b=b)
     return f"POST method"
 
-
+@app.route("/bottlesempty")
+def bottles_empty():
+    return render_template("bottles_empty.html")
+    
+@app.route("/bottlesfilled")
+def bottles_filled():
+    return render_template("bottles_filled.html")
+    
 if __name__ == "__main__":
     webbrowser.open('http://127.0.0.1:5000/')
     app.run()
