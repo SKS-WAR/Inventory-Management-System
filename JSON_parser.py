@@ -59,10 +59,11 @@ def format_to_input():
 
 def search_by_month(ISM_json,month):
     count = 0
+    print(ISM_json)
     for row in ISM_json:
         #print(row['date'])
         date = datetime.datetime.strptime(row['date'], "%Y-%m-%d")
         month_name = date.strftime("%B")
         if month == month_name:
-            count += 1
+            count += int(row['quantity'])
     return count
