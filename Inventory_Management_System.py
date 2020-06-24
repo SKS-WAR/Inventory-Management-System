@@ -16,6 +16,8 @@ app.secret_key = "BIGsecretOfMine&plzDontDecrptMe"
 @app.route("/",methods=["POST","GET"])
 @app.route("/login",methods=["POST","GET"])
 def login():
+    if 'user' in session:
+        return redirect(url_for('product'))
     if request.method == "POST":
         name = request.form["uname"]
         password = request.form["password"]
@@ -78,6 +80,25 @@ def despatch():
     else:
         return redirect(url_for('login'))
 
+
+@app.route('/query',methods=["GET","POST"])
+def query():
+    if 'user' in session:
+        user = session["user"]
+        if request.method == "POST":
+            user = session["user"]
+            
+            month = request.form["month"]
+            total,total_prod,total_dep =  firebaseAPI_handler.bottlesFilledBottles_calc_month(user,month)
+            
+            #a = "Sudeep"
+            #b = "Sahoo"
+            return redirect(url_for("display",usr=total, t_prod=total_prod ,t_dept=total_dep))
+        else:
+            return render_template("query.html")
+    else:
+        return redirect(url_for('login'))   
+
 #to download a file use <a href = "{{url_for('download_report')}}">Download</a>
 @app.route("/download")
 def download():
@@ -93,20 +114,6 @@ def logout():
     session.pop('user',None)
     return redirect(url_for('login'))
 
-@app.route('/query',methods=["GET","POST"])
-def query():
-    if request.method == "POST":
-        user = session["user"]
-        
-        month = request.form["month"]
-        total,total_prod,total_dep =  firebaseAPI_handler.bottlesFilledBottles_calc_month(user,month)
-        
-        #a = "Sudeep"
-        #b = "Sahoo"
-        return redirect(url_for("display",usr=total, t_prod=total_prod ,t_dept=total_dep))
-    else:
-        return render_template("query.html")
-        
 @app.route('/result',methods=["GET"])
 def display():
     if request.method == "GET":
