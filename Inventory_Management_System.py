@@ -11,7 +11,7 @@ from datetime import date
 import date_time
 
 app = Flask(__name__)
-app.secret_key = "BIGsecretOfMine&plzDontDecrptMe"
+app.secret_key = "0d8fb9370a5bf7b892be4865cdf8b658a82209624e33ed71cae353b0df254a75db63d1baa35ad99f26f1b399c31f3c666a7fc67ecef3bdcdb7d60e8ada90b722"
 
 @app.route("/",methods=["POST","GET"])
 @app.route("/login",methods=["POST","GET"])
