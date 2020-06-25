@@ -24,11 +24,28 @@ def login():
         user = firebaseAPI_handler.login(name,password)
         session['user'] = user
         if user != None :
-            return redirect(url_for("product"))
+            return redirect(url_for("home"))
         else:
             return render_template('login.html')
     else:
         return render_template("login.html")
+
+@app.route('/landing')
+@app.route('/home')
+def home():
+    if 'user' in session:
+        return render_template('landing.html')
+    return redirect(url_for('login'))
+
+@app.route("/bottlesempty")
+def bottles_empty():
+    return render_template("bottles_empty.html")
+    
+@app.route("/bottlesfilled")
+def bottles_filled():
+    return render_template("bottles_filled.html")
+
+
 
 @app.route("/product",methods=["POST","GET"])
 def product():
@@ -93,7 +110,7 @@ def query():
             
             #a = "Sudeep"
             #b = "Sahoo"
-            return redirect(url_for("display",usr=total, t_prod=total_prod ,t_dept=total_dep))
+            return redirect(url_for("display",total=total, t_prod=total_prod ,t_dept=total_dep))
         else:
             return render_template("query.html")
     else:
@@ -117,23 +134,12 @@ def logout():
 @app.route('/result',methods=["GET"])
 def display():
     if request.method == "GET":
-        month = request.args.get("usr")
+        month = request.args.get("total")
         a = request.args.get("t_prod")
         b = request.args.get("t_dept")
         return render_template("result.html",month = month,a=a,b=b)
     return f"POST method"
 
-@app.route("/bottlesempty")
-def bottles_empty():
-    return render_template("bottles_empty.html")
-    
-@app.route("/bottlesfilled")
-def bottles_filled():
-    return render_template("bottles_filled.html")
-
-@app.route('/landing')
-def landing_page():
-    return render_template("landing.html")
     
 if __name__ == "__main__":
     webbrowser.open('http://127.0.0.1:5000/')
