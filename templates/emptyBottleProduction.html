@@ -1,0 +1,42 @@
+{% extends "Base.html" %}
+{% block title %}Spesina IMS{% endblock %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+
+<h2 style="color: white"><center>Production</center></h2>
+<form action="#" method="post">
+<br>
+<br>
+    
+<div>
+    <center><label for="product" style="color: aliceblue">Product:</label></center>
+    <center><select name="product" id="product" required>
+        <option value="ROJ(220ml)">ROJ(220ml)</option>
+        <option value="ROJ(500ml)">ROJ(500ml)</option>
+        <option value="ROJ(1L)">ROJ(1L)</option>
+        <option value="ROJ(2L)">ROJ(2L)</option>
+        <option value="ROJ(5L)">ROJ(5L)</option>
+        </select></center>
+</div>
+<br>
+<br>
+    
+<div>
+    <center><label for="units" style="color: aliceblue">Number of Units:</label></center>
+    <center><input type="number" id="units" width="30" name="units" placeholder="Number of Units" required></center>
+</div>
+<br>
+<br>
+    
+<div>
+    <center><label for="price" style="color: aliceblue">Price:</label></center>
+    <center><input type="number" id="price" width="30" name="price" placeholder="Price" required></center>
+</div><br>
+    
+    <center><button type="reset">Reset</button>
+    <button type="submit">Submit</button></center>
+</form>
+{% endblock %}
