@@ -130,6 +130,10 @@ def bottles_empty():
 @app.route("/bottlesfilled")
 def bottles_filled():
     return render_template("bottles_filled.html")
+
+@app.route('/landing')
+def landing_page():
+    return render_template("landing.html")
     
 if __name__ == "__main__":
     webbrowser.open('http://127.0.0.1:5000/')
