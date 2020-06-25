@@ -99,16 +99,87 @@ def sendFilledBottlesDespatchData(auth,name,date="",price="",quantity=""):
             'quantity' : quantity
         }
     },token=auth['idToken'])
-    
-#def amount_calc():
-#    pass
-
 
 def bottlesFilledBottles_calc_month(auth,month):
     #amount = db.child('IMS').child('amount').child('total').get(auth['idToken']).val()
     json = db.child('IMS').child("bottles").child("filledBottles").child('production').get(auth['idToken']).val()
     production_count = JSON_parser.search_by_month(json,month)
     json = db.child('IMS').child("bottles").child("filledBottles").child('despatch').get(auth['idToken']).val()
+    despatch_count = JSON_parser.search_by_month(json,month)
+    amount = production_count - despatch_count
+    return amount,production_count,despatch_count
+
+    
+################################################################################################
+
+
+
+def sendEmptyBottlesProductionData(auth,name,date="",price="",quantity=""):
+    try:
+        row = JSON_parser.transaction_count(db.child('IMS').child("bottles").child("emptyBottles").child('production').get(auth['idToken']).val())
+    except:
+        row = "0"
+    
+    try:
+        total = db.child('IMS').child("bottles").child("emptyBottles").child('amount').child('total').get(user['idToken']).val()
+    except :
+        total = "0"
+    if total == None:
+        total = "0"
+    total = str((int)(quantity) + (int)(total))
+    print(total)
+    users_ref = db.child('IMS').child("bottles").child("emptyBottles").child('amount')
+    users_ref.update({"total" : total} ,token=user['idToken'])
+    
+    users_ref = db.child('IMS').child("bottles").child("emptyBottles").child('production')
+    users_ref.update({
+        row : {
+            'name' : name,
+            'date' : date,
+            'price' : price,
+            'quantity' : quantity
+        }
+    },token=auth['idToken'])
+
+def sendEmptyBottlesDespatchData(auth,name,date="",price="",quantity=""):
+    
+    try:
+        row = JSON_parser.transaction_count(db.child('IMS').child("bottles").child("emptyBottles").child('despatch').get(auth['idToken']).val())
+    except:
+        row = "0"
+    
+    try:
+        total = db.child('IMS').child("bottles").child("emptyBottles").child('amount').child('total').get(user['idToken']).val()
+    except :
+        total = 0
+        
+    if total == None:
+        total = "0"
+    total = str((int)(total) - (int)(quantity))
+    print(total)
+    users_ref = db.child('IMS').child("bottles").child("emptyBottles").child('amount')
+    users_ref.update({"total" : total} ,token=user['idToken'])
+    
+    
+    users_ref = db.child('IMS').child("bottles").child("emptyBottles").child('despatch')
+    users_ref.update({
+        row : {
+            'name' : name,
+            'date' : date,
+            'price' : price,
+            'quantity' : quantity
+        }
+    },token=auth['idToken'])
+
+#def amount_calc():
+#    pass
+
+
+def bottlesEmptyBottles_calc_month(auth,month):
+    #amount = db.child('IMS').child('amount').child('total').get(auth['idToken']).val()
+    json = db.child('IMS').child("bottles").child("emptyBottles").child('production').get(auth['idToken']).val()
+    production_count = JSON_parser.search_by_month(json,month)
+    json = db.child('IMS').child("bottles").child("emptyBottles").child('despatch').get(auth['idToken']).val()
     despatch_count = JSON_parser.search_by_month(json,month)
     amount = production_count - despatch_count
     return amount,production_count,despatch_count
