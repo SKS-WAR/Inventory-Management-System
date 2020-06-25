@@ -1,24 +1,33 @@
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="my_style.css">
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/my_style.css')}}">
     </head>
-        <h2 style="color: darkblue"><center>Welcome to</center></h2><br>
-        <h2 style="color: darkblue"><center>Spesina Food and Agro Industries Pvt. Ltd.</center></h2><hr><br>
-        <h2 style="color: darkblue"><center>LOGIN</center></h2>
+    <body>
+        <br>
+        <br>
+        <h2 style="color: aliceblue"><center>Welcome to</center></h2><br>
+        <h2 style="color: aliceblue"><center>Spesina Food and Agro Industries Pvt. Ltd.</center></h2><hr><br>
+        <h2 style="color: aliceblue"><center>LOGIN</center></h2>
+        <br>
+        <br>
         <form action="#" method="post">
-
         <div>
-            <center><label for="uname">Username:</label></center>
-            <center><input type="text" id="uname" width="30" name="uname" placeholder="Enter the username" required class="input"></center>
-        </div><br>
-
+            <center><label for="uname" style="color: aliceblue"><h3>Username:</h3></label></center>
+            <center><input type="text" id="uname" width="30" style="color: aliceblue" name="uname" placeholder="Enter the username" required class="input"></center>
+        </div>
+        <br>
+        <br>
+            
         <div>
-            <center><label for="password">Password:</label></center>
-            <center><input type="password" id="password" width="30" name="password" placeholder="Password" required class="input"></center>
-        </div><br>
+            <center><label for="password" style="color: aliceblue"><h3>Password:</h3></label></center>
+            <center><input type="password" id="password" width="30" style="color: aliceblue" name="password" placeholder="Password" required class="input"></center>
+        </div>
+        <br>
+        <br>
 
             <center><button type="reset">Reset</button>
             <button type="submit">Submit</button></center>
         </form>
-
+        <hr>
+    </body>
 </html>
