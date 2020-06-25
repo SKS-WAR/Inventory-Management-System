@@ -1,5 +1,15 @@
-<html>
-    <body>
-        <h1>{{total}},{{t_prod}},{{t_dept}}</h1>
-    </body>
-</html>
+{% extends "Base.html" %}
+{% block title %}Spesina IMS{% endblock %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<h1 style="color: aliceblue"><center>Total:{{total}}</center></h1>
+<br>
+<br>
+<h1 style="color: aliceblue"><center>Production:{{t_prod}}</center></h1>
+<br>
+<br>
+<h1 style="color: aliceblue"><center>Despatched:{{t_dept}}</center></h1>
+{% endblock %}
