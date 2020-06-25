@@ -17,7 +17,7 @@ app.secret_key = "BIGsecretOfMine&plzDontDecrptMe"
 @app.route("/login",methods=["POST","GET"])
 def login():
     if 'user' in session:
-        return redirect(url_for('product'))
+        return redirect(url_for('home'))
     if request.method == "POST":
         name = request.form["uname"]
         password = request.form["password"]
@@ -49,8 +49,8 @@ def bottles_filled():
         return render_template("bottles_filled.html")
     return redirect(url_for('login'))
 
-@app.route("/product",methods=["POST","GET"])
-def product():
+@app.route("/bottlesfilledproduction",methods=["POST","GET"])
+def bottlesfilledproduction():
     if 'user' in session:
         user = session["user"]
         if request.method == "POST":
@@ -64,22 +64,15 @@ def product():
                 desktopNotification.notify("Data Inserted successfully")
             except :
                 desktopNotification.notify("Some Issues Arised")
-            return redirect(url_for("product"))
+            return redirect(url_for("bottlesfilledproduction"))
         else:
-            return render_template("index.html")
+            return render_template("filledBottleProduction.html")
     else:
         return redirect(url_for('login'))
 
-@app.route("/user")
-def user():
-    if 'user' in session:
-        user = session["user"]
-        return f"<h1>{user}</h1>"
-    else:
-        return redirect(url_for('login'))
 
-@app.route("/despatch",methods=["POST","GET"])
-def despatch():
+@app.route("/bottlesfilleddespatch",methods=["POST","GET"])
+def bottlesfilleddespatch():
     if 'user' in session:
         user = session["user"]
         if request.method == "POST":
@@ -93,15 +86,15 @@ def despatch():
                 desktopNotification.notify("Data Inserted successfully")
             except :
                 desktopNotification.notify("Some Issues Arised")
-            return redirect(url_for("despatch"))
+            return redirect(url_for("bottlesfilleddespatch"))
         else:
-            return render_template("despatch.html")
+            return render_template("filledBottleDespatch.html")
     else:
         return redirect(url_for('login'))
 
 
-@app.route('/query',methods=["GET","POST"])
-def query():
+@app.route('/bottlesfilledquery',methods=["GET","POST"])
+def bottlesfilledquery():
     if 'user' in session:
         user = session["user"]
         if request.method == "POST":
@@ -109,14 +102,23 @@ def query():
             
             month = request.form["month"]
             total,total_prod,total_dep =  firebaseAPI_handler.bottlesFilledBottles_calc_month(user,month)
-            
-            #a = "Sudeep"
-            #b = "Sahoo"
             return redirect(url_for("display",total=total, t_prod=total_prod ,t_dept=total_dep))
         else:
-            return render_template("query.html")
+            return render_template("filledBottleQuery.html")
     else:
         return redirect(url_for('login'))   
+    
+    
+    
+@app.route("/user")
+def user():
+    if 'user' in session:
+        user = session["user"]
+        return f"<h1>{user}</h1>"
+    else:
+        return redirect(url_for('login'))
+    
+    
 
 #to download a file use <a href = "{{url_for('download_report')}}">Download</a>
 @app.route("/download")
