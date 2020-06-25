@@ -1,8 +1,4 @@
 from flask import Flask,redirect,url_for, render_template, request,send_file,session
-try:
-    import sendDataToFirebase
-except :
-    pass
 import webbrowser
 import desktopNotification
 import firebaseAPI_handler
@@ -70,6 +66,27 @@ def bottlesfilledproduction():
     else:
         return redirect(url_for('login'))
 
+@app.route("/bottlesemptyproduction",methods=["POST","GET"])
+def bottlesemptyproduction():
+    if 'user' in session:
+        user = session["user"]
+        if request.method == "POST":
+            dt = date_time.get_current_date()
+            product_name = request.form["product"]
+            units = request.form["units"]
+            price = request.form["price"]
+            #sending data to firebase
+            try:
+                firebaseAPI_handler.sendEmptyBottlesProductionData(auth=user,name=product_name,date=dt,price=price,quantity=units)
+                desktopNotification.notify("Data Inserted successfully")
+            except :
+                desktopNotification.notify("Some Issues Arised")
+            return redirect(url_for("bottlesemptyproduction"))
+        else:
+            return render_template("emptyBottleProduction.html")
+    else:
+        return redirect(url_for('login'))
+
 
 @app.route("/bottlesfilleddespatch",methods=["POST","GET"])
 def bottlesfilleddespatch():
@@ -92,6 +109,26 @@ def bottlesfilleddespatch():
     else:
         return redirect(url_for('login'))
 
+@app.route("/bottlesemptydespatch",methods=["POST","GET"])
+def bottlesemptydespatch():
+    if 'user' in session:
+        user = session["user"]
+        if request.method == "POST":
+            d = date_time.get_current_date()
+            p_name = request.form["product"]
+            unts = request.form["units"]
+            amount = request.form["price"]
+            #sending data to firebase
+            try:
+                firebaseAPI_handler.sendEmptyBottlesDespatchData(auth=user,name=p_name,date=d,price=amount,quantity=unts)
+                desktopNotification.notify("Data Inserted successfully")
+            except :
+                desktopNotification.notify("Some Issues Arised")
+            return redirect(url_for("bottlesemptydespatch"))
+        else:
+            return render_template("emptyBottleDespatch.html")
+    else:
+        return redirect(url_for('login'))
 
 @app.route('/bottlesfilledquery',methods=["GET","POST"])
 def bottlesfilledquery():
@@ -108,6 +145,22 @@ def bottlesfilledquery():
     else:
         return redirect(url_for('login'))   
     
+@app.route('/bottlesemptyquery',methods=["GET","POST"])
+def bottlesemptyquery():
+    if 'user' in session:
+        user = session["user"]
+        if request.method == "POST":
+            user = session["user"]
+            
+            month = request.form["month"]
+            total,total_prod,total_dep =  firebaseAPI_handler.bottlesEmptyBottles_calc_month(user,month)
+            return redirect(url_for("display",total=total, t_prod=total_prod ,t_dept=total_dep))
+        else:
+            return render_template("emptyBottleQuery.html")
+    else:
+        return redirect(url_for('login'))   
+    
+
     
     
 @app.route("/user")
