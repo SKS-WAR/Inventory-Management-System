@@ -39,13 +39,15 @@ def home():
 
 @app.route("/bottlesempty")
 def bottles_empty():
-    return render_template("bottles_empty.html")
+    if 'user' in session:
+        return render_template("bottles_empty.html")
+    return redirect(url_for('login'))
     
 @app.route("/bottlesfilled")
 def bottles_filled():
-    return render_template("bottles_filled.html")
-
-
+    if 'user' in session:
+        return render_template("bottles_filled.html")
+    return redirect(url_for('login'))
 
 @app.route("/product",methods=["POST","GET"])
 def product():
@@ -134,10 +136,10 @@ def logout():
 @app.route('/result',methods=["GET"])
 def display():
     if request.method == "GET":
-        month = request.args.get("total")
-        a = request.args.get("t_prod")
-        b = request.args.get("t_dept")
-        return render_template("result.html",month = month,a=a,b=b)
+        total = request.args.get("total")
+        t_prod = request.args.get("t_prod")
+        t_dept = request.args.get("t_dept")
+        return render_template("result.html",total = total,t_prod=t_prod,t_dept=t_dept)
     return f"POST method"
 
     
