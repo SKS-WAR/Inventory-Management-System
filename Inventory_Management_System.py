@@ -13,7 +13,8 @@ app.secret_key = "0d8fb9370a5bf7b892be4865cdf8b658a82209624e33ed71cae353b0df254a
 @app.route("/login",methods=["POST","GET"])
 def login():
     if 'user' in session:
-        return redirect(url_for('home'))
+        if session['user'] != None:
+            return redirect(url_for('home'))
     if request.method == "POST":
         name = request.form["uname"]
         password = request.form["password"]
