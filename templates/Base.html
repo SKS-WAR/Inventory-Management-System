@@ -2,21 +2,22 @@
     <head>
 
         <title>{% block title %}{% endblock %}</title>
-                <link rel="stylesheet" href="{{ url_for('static', filename='css/my_style.css') }}">
+                <link rel="stylesheet" href="{{ url_for('static', filename='css/New_Css_2.css') }}">
     </head>
     <body>
          <header>
-            <p style="color: aliceblue">Spesina Food and Agro Industries Pvt. Ltd.</p>
+            <!--<p style="color: aliceblue">Spesina Food and Agro Industries Pvt. Ltd.</p>-->
             <nav>
                  <ul class="nav__links">
                     <li><a href="{{url_for('bottles_empty')}}">Bottles Empty</a></li>
                     <li><a href="{{url_for('bottles_filled')}}">Bottles Filled</a></li>
+                     <li><a href="{{url_for('logout')}}">LOG OUT</a></li>
                     
                 </ul>
             </nav>
-            <a class="cta" href="{{url_for('logout')}}"><button>Logout</button></a>
         </header>
-        <div class="container" style="color: aliceblue">
+        <br>
+        <div class="container" style="color: #009688">
             <center>
             {% with messages = get_flashed_messages() %}
                 {% if messages %}
