@@ -7,6 +7,17 @@
         <br>
         <h2 style="color: aliceblue"><center>Welcome to</center></h2><br>
         <h2 style="color: aliceblue"><center>Spesina Food and Agro Industries Pvt. Ltd.</center></h2><hr><br>
+        <div class="container" style="color: aliceblue">
+            <center>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            </center>
+        </div>
         <h2 style="color: aliceblue"><center>LOGIN</center></h2>
         <br>
         <br>
