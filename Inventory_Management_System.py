@@ -74,7 +74,10 @@ def bottlesemptyproduction():
             dt = date_time.get_current_date()
             product_name = request.form["product"]
             units = request.form["units"]
-            price = request.form["price"]
+            try:
+                price = request.form["price"]
+            except:
+                price = ""
             #sending data to firebase
             try:
                 firebaseAPI_handler.sendEmptyBottlesProductionData(auth=user,name=product_name,date=dt,price=price,quantity=units)
@@ -196,6 +199,10 @@ def display():
         t_dept = request.args.get("t_dept")
         return render_template("result.html",total = total,t_prod=t_prod,t_dept=t_dept)
     return f"POST method"
+
+@app.errorhandler(404)
+def error404(error):
+    return render_template('error.html')
 
     
 if __name__ == "__main__":
