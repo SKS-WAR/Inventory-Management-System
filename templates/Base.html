@@ -16,6 +16,17 @@
             </nav>
             <a class="cta" href="{{url_for('logout')}}"><button>Logout</button></a>
         </header>
+        <div class="container" style="color: aliceblue">
+            <center>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            </center>
+        </div>
         <div class="bg_color">
         {% block content %}
         {% endblock %}
