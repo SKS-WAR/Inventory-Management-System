@@ -1,4 +1,4 @@
-from flask import Flask,redirect,url_for, render_template, request,send_file,session
+from flask import Flask,redirect,url_for, render_template, request,send_file,session,flash
 import webbrowser
 import desktopNotification
 import firebaseAPI_handler
@@ -20,8 +20,10 @@ def login():
         user = firebaseAPI_handler.login(name,password)
         session['user'] = user
         if user != None :
+            flash("Successfully Logged In",category='success')
             return redirect(url_for("home"))
         else:
+            flash("Invalid Email and password",category='error')
             return render_template('login.html')
     else:
         return render_template("login.html")
@@ -57,9 +59,11 @@ def bottlesfilledproduction():
             #sending data to firebase
             try:
                 firebaseAPI_handler.sendFilledBottlesProductionData(auth=user,name=product_name,date=dt,price=price,quantity=units)
-                desktopNotification.notify("Data Inserted successfully")
+                flash("Data Inserted Successfully",category='success')
+                #desktopNotification.notify("Data Inserted successfully")
             except :
-                desktopNotification.notify("Some Issues Arised")
+                flash("Data was not inserted successfully",category='error')
+                #desktopNotification.notify("Some Issues Arised")
             return redirect(url_for("bottlesfilledproduction"))
         else:
             return render_template("filledBottleProduction.html")
@@ -74,16 +78,15 @@ def bottlesemptyproduction():
             dt = date_time.get_current_date()
             product_name = request.form["product"]
             units = request.form["units"]
-            try:
-                price = request.form["price"]
-            except:
-                price = ""
+            price = request.form["price"]
             #sending data to firebase
             try:
                 firebaseAPI_handler.sendEmptyBottlesProductionData(auth=user,name=product_name,date=dt,price=price,quantity=units)
-                desktopNotification.notify("Data Inserted successfully")
+                flash("Data Inserted Successfully",category='success')
+                #desktopNotification.notify("Data Inserted successfully")
             except :
-                desktopNotification.notify("Some Issues Arised")
+                flash("Data Not Inserted Successfully",category='error')
+                #desktopNotification.notify("Some Issues Arised")
             return redirect(url_for("bottlesemptyproduction"))
         else:
             return render_template("emptyBottleProduction.html")
@@ -103,9 +106,11 @@ def bottlesfilleddespatch():
             #sending data to firebase
             try:
                 firebaseAPI_handler.sendFilledBottlesDespatchData(auth=user,name=p_name,date=d,price=amount,quantity=unts)
-                desktopNotification.notify("Data Inserted successfully")
+                flash("Data Inserted Successfully",category='success')
+                #desktopNotification.notify("Data Inserted successfully")
             except :
-                desktopNotification.notify("Some Issues Arised")
+                flash("Data Not Inserted Successfully",category='error')
+                #desktopNotification.notify("Some Issues Arised")
             return redirect(url_for("bottlesfilleddespatch"))
         else:
             return render_template("filledBottleDespatch.html")
@@ -124,9 +129,11 @@ def bottlesemptydespatch():
             #sending data to firebase
             try:
                 firebaseAPI_handler.sendEmptyBottlesDespatchData(auth=user,name=p_name,date=d,price=amount,quantity=unts)
-                desktopNotification.notify("Data Inserted successfully")
+                flash("Data Inserted Successfully",category='success')
+                #desktopNotification.notify("Data Inserted successfully")
             except :
-                desktopNotification.notify("Some Issues Arised")
+                flash("Data Not Inserted Successfully",category='error')
+                #desktopNotification.notify("Some Issues Arised")
             return redirect(url_for("bottlesemptydespatch"))
         else:
             return render_template("emptyBottleDespatch.html")
