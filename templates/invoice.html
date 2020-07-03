@@ -1,0 +1,126 @@
+<html>
+    <head>
+        <title>
+            Invoice
+        </title>
+    <style>
+        #invoice_table {
+          font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+          border-collapse: collapse;
+          width: 75%;
+        }
+
+        #invoice_table td, #invoice_table th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+
+        #invoice_table tr:nth-child(even){background-color: #f2f2f2;}
+
+        #invoice_table tr:hover {background-color: #ddd;}
+
+        #invoice_table th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+          background-color: #4CAF50;
+          color: white;
+        }
+        </style>
+    </head>
+    
+    <body>
+    <form action="#" method="post">
+        
+        <table id="">
+            <tr>
+                <td colspan="5" rowspan="8"><img src="Doc1.jpg" height="300px" width="450px"></td>
+                <td colspan="3">Invoice number: <input id="invoice_number" name="invoice_number" type="number"> </td>
+                <td colspan="2">Date:<input type="date" id="date" name="date"></td>
+            </tr>
+            <tr>
+                <td colspan="3">Cust Order Ref/Date:<input type='date' id="cust_date" name="cust_date"> </td>
+                <td colspan="2">Ship To:<input type="text" id="shipping_adrs" name="shipping_adrs"></td>
+            </tr>
+            <tr>
+                <td colspan="3">Order no.:<input type='number' id='order_no' name='order_no'> </td>
+                <td colspan="2">Address:<input type="text" id='adrs' name='adrs'></td>
+            </tr>
+            <tr>
+                <td colspan="3">Order Date:<input type='date' id='order_date' name='order_date'> </td>
+                <td colspan="2">GSTIN:<input type="text" id='gstin' name="gstin"></td>
+            </tr>
+            <tr>
+                <td colspan="3">Delivery Number:<input type='number' id='delv_no' name='delv_no'> </td>
+                <td colspan="2">State:<input type="text" placeholder="Odisha" id='state' name='state' value='Odisha'></td>
+            </tr>
+            <tr>
+                <td colspan="3">Delivery Date:<input type='date' id='delv_date' name='delv_date'> </td>
+                <td colspan="2">PIN:<input type="number" id='pin' name='pin'></td>
+            </tr>
+            <tr>
+                <td colspan="3">Payment Due Date:<input type='date' id='pay_due_date' name='pay_due_date'> </td>
+                <td colspan="2">Contact:<input type="number" id='contact' name='contact'></td>
+            </tr>
+            <tr>
+                <td colspan="5">E-Way Bill number:<input type='number' name='e_way' id='e_way'> </td>
+            </tr>       
+        </table>
+        <table id='invoice_table'>
+            <tr>
+                <th>Sl.no</th>
+                <th>Product</th>
+                <th>Batch No.</th>
+                <th>Mfg. Date</th>
+                <th>Bill Qty.</th>
+                <th>Free Qty.</th>
+                <th>HSN</th>
+                <th>MRP<br>(in Rs.)</th>
+                <th>PTR/Pack<br>(in Rs.)</th>
+                <th>Amount<br>(in Rs.)</th>
+            </tr>
+            <tr id="sn_1">
+                <td id="sn_1_sno">1</td>
+                <td id="sn_1_prod">ROJ(220ml)</td>
+                <td><input type='text' id="sn_1_batch" size="4"></td>
+                <td><input type='date' id='sn_1_mfg_date'></td>
+                <td><input type="number" id="sn_1_bill_qty" min=0 max = 100000></td>
+                <td><input type="number" id="sn_1_free_qty" min=0 max = 100000></td>
+                <td><input type="text" id="sn_1_hsn" value="805500" size="6"></td>
+                <td><input type="number" id="sn_1_mrp" value="240" min=0 max = 10000></td>
+                <td><input type="number" id="sn_1_ptr" value="183" min=0 max = 10000000></td>
+                <td><input type="number" id="sn_1_amount"></td>
+            </tr>
+            <tr>
+                <td colspan="8"> </td>
+                <td>Total: Rs.</td>
+                <td><input type="number" id="total"></td>
+            </tr>
+            <tr>
+                <td colspan="8"> </td>
+                <td>CGST(6%): Rs.</td>
+                <td><input type="number" id="cgst"></td>
+            </tr>
+            <tr>
+                <td colspan="8"> </td>
+                <td>SGST(6%): Rs.</td>
+                <td><input type="number" id="sgst"></td>
+            </tr>
+            <tr>
+                <td colspan="8"> </td>
+                <td>Discount : Rs.</td>
+                <td><input type="number" id="disc"></td>
+            </tr>
+            <tr>
+                <td colspan="8"> </td>
+                <td>Grand Total: Rs.</td>
+                <td><input type="number" id="gtotal"></td>
+            </tr>
+            <tr>
+                <td colspan="10">Amount in Rupees : <input type="text" id="a_word" size="132"></td>
+            </tr>
+        </table>
+        <center><input type="submit"></center>
+    </form>
+    </body>
+</html>
