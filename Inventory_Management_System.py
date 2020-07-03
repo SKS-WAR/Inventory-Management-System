@@ -1,9 +1,9 @@
 from flask import Flask,redirect,url_for, render_template, request,send_file,session,flash
 import webbrowser
-import desktopNotification
+#import desktopNotification
 import firebaseAPI_handler
-import sendDataToFirebase
-from datetime import date
+#import sendDataToFirebase
+#from datetime import date
 import date_time
 
 app = Flask(__name__)
@@ -172,6 +172,13 @@ def bottlesemptyquery():
         return redirect(url_for('login'))   
     
 
+@app.route('/invoice',methods=["GET","POST"])
+def invoice():
+    if request.method == "POST":
+        return f"Submit button has been clicked..... need to do something on the post method"
+    else:
+        return render_template('invoice.html')
+
     
     
 @app.route("/user")
@@ -214,5 +221,5 @@ def error404(error):
 
     
 if __name__ == "__main__":
-    webbrowser.open('http://127.0.0.1:5000/')
-    app.run()
+    webbrowser.open('http://127.0.0.1:5000/')        
+    app.run(use_debugger=False,use_reloader=False)
